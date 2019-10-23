@@ -8,19 +8,22 @@ module.exports = (app) => {
     })
   );
 
-  app.get("/auth/google/callback", passport.authenticate("google"));
+  app.get("/auth/google/callback", passport.authenticate("google"),
+    (req,res)=>{
+      res.redirect('/surveys');
+    }  
+  );
 
   app.get("/api/current_user",(req,res)=>{
-    console.log(req)
-    res.send({currentUser:req.user,hi:"there"});
+    res.send(req.user);
   })
 
   app.get("/api/logout",(req,res)=>{
     req.logout();
-    res.send(req.user);
+    res.redirect('/')
   })
 
-  app.get("/hello", (req, res) => {
+  app.post("/hello", (req, res) => {
     res.send({ hi: "Hi there! Its prakhar here" });
   });
 };
