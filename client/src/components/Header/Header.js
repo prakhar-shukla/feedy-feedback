@@ -36,7 +36,7 @@ class Header extends React.Component {
     return (
       <header>
         <div className="container">
-          <Link className="logo" to={this.props.auth ? "/surveys" : "/"}>
+          <Link className="logo" to={this.props.auth ? "/dashboard" : "/"}>
             Feedy Feedback
           </Link>
           <nav>

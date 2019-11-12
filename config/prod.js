@@ -10,6 +10,6 @@ module.exports={
     paytmTransactionUrl: process.env.PAYTM_TRANSACTION_URL,
     paytmHostName: process.env.PAYTM_HOST_NAME,
     paytmCallbackUrl : process.env.PAYTM_CALLBACK_URL,
-    clientRedirectionBaseUrl : process.env.CLIENT_REDIRECTION_BASE_URL
-
+    clientRedirectionBaseUrl : process.env.CLIENT_REDIRECTION_BASE_URL,
+    sendGridkey:process.env.SEND_GRID_KEY
 }

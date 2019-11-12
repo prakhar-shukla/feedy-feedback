@@ -10,7 +10,7 @@ module.exports = (app) => {
 
   app.get("/auth/google/callback", passport.authenticate("google"),
     (req,res)=>{
-      res.redirect('/surveys');
+      res.redirect('/dashboard');
     }  
   );
 
@@ -23,7 +23,7 @@ module.exports = (app) => {
     res.redirect('/')
   })
 
-  app.post("/hello", (req, res) => {
+  app.get("/hello", (req, res) => {
     res.send({ hi: "Hi there! Its prakhar here" });
   });
 };

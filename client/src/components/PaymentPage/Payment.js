@@ -7,8 +7,8 @@ class Payment extends React.Component {
   }
   initiatePayment = async () => {
     console.log(this.props);
-    const reqObj = { amount: this.props.amount };
-    const node = this.checkOutForm;
+    // const reqObj = { amount: this.props.amount };
+    // const node = this.checkOutForm;
     //node.current.submit();
   };
 

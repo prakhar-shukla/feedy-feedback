@@ -12,10 +12,10 @@ header {
     font-size: 22px;
   }
   nav {
-    float: right;
     ul {
       list-style: none;
       margin: 0;
+      text-align: right;
       li {
         padding: 15px;
         display: inline-block;

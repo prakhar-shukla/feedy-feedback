@@ -4,11 +4,11 @@ import { connect } from "react-redux";
 import * as actions from "../actions";
 
 import Header from "./Header/Header";
-import Thankyou from "./ThankYou/Thankyou"
+import Dashboard from "./Dashboard/Dashboard";
+import Thankyou from "./ThankYou/Thankyou";
+import SurveyNew from "./Surveys/SurveyNew";
 
-const Dashboard = () => <h2>Dashboard</h2>;
 const Landing = () => <h2>Landing</h2>;
-
 
 class App extends React.Component {
   componentDidMount() {
@@ -22,10 +22,12 @@ class App extends React.Component {
           <div>
             <Header />
             <main className="container">
-              <Route exact path="/" component={Landing} />
-              <Route path="/surveys" component={Dashboard} />
-              <Route path="/thankyou" component={Thankyou} />
-
+              <div className="content-area" style={{ margin: "20px 0" }}>
+                <Route exact path="/" component={Landing} />
+                <Route path="/dashboard" component={Dashboard} />
+                <Route path="/surveys/new" component={SurveyNew} />
+                <Route path="/thankyou" component={Thankyou} />
+              </div>
             </main>
           </div>
         </BrowserRouter>

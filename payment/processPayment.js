@@ -52,26 +52,18 @@ function initiatePayment(app, req, res) {
 
 function verifyPaymentStatus(app, req, res) {
   var body = req.body;
-  var html = "";
   var post_data = body;
   // received params in callback
   console.log("Callback Response: ", post_data, "\n");
-  html += "<b>Callback Response</b><br>";
-  for (var x in post_data) {
-    html += x + " => " + post_data[x] + "<br/>";
-  }
-  html += "<br/><br/>";
   // verify the checksum
   var checksumhash = post_data.CHECKSUMHASH;
-  // delete post_data.CHECKSUMHASH;
   var result = checksum_lib.verifychecksum(
     post_data,
     PaytmConfig.key,
     checksumhash
   );
   console.log("Checksum Result => ", result, "\n");
-  html += "<b>Checksum Result</b> => " + (result ? "True" : "False");
-  html += "<br/><br/>";
+
   // Send Server-to-Server request to verify Order Status
   var params = { MID: PaytmConfig.mid, ORDERID: post_data.ORDERID };
   checksum_lib.genchecksum(params, PaytmConfig.key, function(err, checksum) {
@@ -96,10 +88,6 @@ function verifyPaymentStatus(app, req, res) {
       post_res.on("end", function() {
         console.log("S2S Response: ", response, "\n");
         var _result = JSON.parse(response);
-        html += "<b>Status Check Response</b><br>";
-        for (var x in _result) {
-          html += x + " => " + _result[x] + "<br/>";
-        }
         var redirectionUrl =
           PaytmConfig.clientRedirectionBaseUrl +
           PaytmConfig.clientSuccessPageUrl;
