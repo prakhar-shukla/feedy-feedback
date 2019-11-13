@@ -6,9 +6,11 @@ module.exports=(app)=>{
         processSurveys.createNewSurvey(req,res)
     })
 
-    app.post('api/surveys/webhook',(req,res)=>{
-        console.log("REQUEST RECEIVED WEBHOK")
-        console.log(req.body);
-        res.send({});
+    app.post('/api/surveys/webhook',(req,res)=>{
+        processSurveys.handleWebHook(req,res)
+    })
+
+    app.get('/api/surveys/:surveyId/:choice',(req,res)=>{
+        res.send("Thanks for voting")
     })
 }
