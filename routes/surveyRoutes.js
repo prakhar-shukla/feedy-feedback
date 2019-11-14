@@ -10,6 +10,10 @@ module.exports=(app)=>{
         processSurveys.handleWebHook(req,res)
     })
 
+    app.get('/api/surveys',requireLogin,(req,res)=>{
+        processSurveys.getSurveyList(req,res)
+    })
+
     app.get('/api/surveys/:surveyId/:choice',(req,res)=>{
         res.send("Thanks for voting")
     })

@@ -66,13 +66,25 @@ function handleWebHook(req, res) {
         _id: event.surveyId,
         recipients: { $elemMatch: { email: event.email, responded: false } }
       },
-      { $inc: { [event.choice]: 1 }, $set: { "recipients.$.responded": true } ,lastResponded:new Date()}
+      {
+        $inc: { [event.choice]: 1 },
+        $set: { "recipients.$.responded": true },
+        lastResponded: new Date()
+      }
     ).exec();
   });
   res.send({});
 }
 
+async function getSurveyList(req, res) {
+  const surveys = await Survey.find({ _user: req.user.id }).select({
+    recipients: false
+  });
+  res.send(surveys);
+}
+
 module.exports = {
   createNewSurvey: createNewSurvey,
-  handleWebHook: handleWebHook
+  handleWebHook: handleWebHook,
+  getSurveyList: getSurveyList
 };

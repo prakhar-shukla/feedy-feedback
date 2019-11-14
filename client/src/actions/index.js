@@ -16,3 +16,10 @@ export const sendSurvey=(values,history)=>{
         dispatch({type:types.FETCH_USER,payload:response.data})
     }
 }
+
+export const fetchSurveys=()=>{
+    return async function(dispatch){
+        var response= await axios.get('/api/surveys');
+        dispatch({type:types.FETCH_SURVEYS,payload:response.data})
+    }
+}
