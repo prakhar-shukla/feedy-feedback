@@ -13,7 +13,8 @@ export const sendSurvey=(values,history)=>{
     return async function(dispatch){
         var response = await axios.post('/api/surveys',values);
         history.push('/dashboard')
-        dispatch({type:types.FETCH_USER,payload:response.data})
+        dispatch({type:types.FETCH_USER,payload:response.data});
+        fetchSurveys();
     }
 }
 

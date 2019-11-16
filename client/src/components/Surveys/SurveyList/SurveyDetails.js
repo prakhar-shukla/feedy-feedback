@@ -9,26 +9,24 @@ class SurveyDetails extends React.Component {
     this.selectedSurveyId = this.props.match.params.id;
     this.selectedSurvey = [];
   }
-  
+
   componentDidMount() {
     if (!this.props.surveys.length) {
       this.props.fetchSurveys();
     }
-    console.log("ALL SURVEY ", this.props.surveys);
   }
 
   render() {
-      
     this.selectedSurvey = this.props.surveys.filter(survey => {
-        if (survey._id === this.selectedSurveyId) {
-          return survey;
-        }
-      });
-  
-      console.log("SURVEY ID", this.selectedSurveyId);
-      console.log("SURVEY ", this.selectedSurvey);
+      if (survey._id === this.selectedSurveyId) {
+        return survey;
+      }
+    });
     return (
       <div>
+        <h2 className="mb-4">
+          {this.selectedSurvey[0] ? this.selectedSurvey[0].title : "Loading.."}
+        </h2>
         <table className="table">
           <thead>
             <tr key={this.selectedSurveyId}>
@@ -37,7 +35,11 @@ class SurveyDetails extends React.Component {
               <th>Response</th>
             </tr>
           </thead>
-          <tbody>{this.renderRecipients(this.selectedSurvey[0]?this.selectedSurvey[0].recipients:[])}</tbody>
+          <tbody>
+            {this.renderRecipients(
+              this.selectedSurvey[0] ? this.selectedSurvey[0].recipients : []
+            )}
+          </tbody>
         </table>
       </div>
     );
@@ -47,9 +49,15 @@ class SurveyDetails extends React.Component {
     return recipients.map((recipient, index) => {
       return (
         <tr key={recipient._id}>
-          <td>{index+1}</td>
+          <td>{index + 1}</td>
           <td>{recipient.email}</td>
-          <td>{recipient.responded? recipient.response || "NA":"Not Responded"}</td>
+          <td>
+            {recipient.responded
+              ? recipient.response
+                ? recipient.response.toUpperCase()
+                : "NA"
+              : "Not Responded"}
+          </td>
         </tr>
       );
     });
