@@ -47,9 +47,9 @@ class SurveyDetails extends React.Component {
     return recipients.map((recipient, index) => {
       return (
         <tr key={recipient._id}>
-          <td>{index}</td>
+          <td>{index+1}</td>
           <td>{recipient.email}</td>
-          <td>{recipient.response || "NA"}</td>
+          <td>{recipient.responded? recipient.response || "NA":"Not Responded"}</td>
         </tr>
       );
     });

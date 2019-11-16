@@ -5,15 +5,16 @@ import { withRouter } from "react-router-dom";
 
 class SurveyList extends React.Component {
   componentDidMount() {
-    this.props.fetchSurveys();
-  }
+    if (!this.props.state.surveys.length) {
+        this.props.fetchSurveys();
+      }  }
 
   viewSurveyDetails(surveyId) {
     this.props.history.push(`/survey/${surveyId}`);
   }
 
   renderSurveys() {
-    var surveyList = this.props.state.surveys.reverse().map(survey => {
+    var surveyList = this.props.state.surveys.map(survey => {
       return (
         <div
           className="card mb-4"

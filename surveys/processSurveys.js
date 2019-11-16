@@ -78,7 +78,7 @@ function handleWebHook(req, res) {
 
 async function getSurveyList(req, res) {
   const surveys = await Survey.find({ _user: req.user.id });
-  res.send(surveys);
+  res.send(surveys.reverse());
 }
 
 module.exports = {
