@@ -1,17 +1,28 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchSurveys } from "../../../actions";
+import { withRouter } from "react-router-dom";
 
 class SurveyList extends React.Component {
   componentDidMount() {
     this.props.fetchSurveys();
   }
 
-  renderSurveys() {
+  viewSurveyDetails(surveyId) {
+    this.props.history.push(`/survey/${surveyId}`);
+  }
 
-    var surveyList= ( this.props.state.surveys.reverse().map(survey => {
+  renderSurveys() {
+    var surveyList = this.props.state.surveys.reverse().map(survey => {
       return (
-        <div className="card mb-4" key={survey._id} >
+        <div
+          className="card mb-4"
+          key={survey._id}
+          style={{ cursor: "pointer" }}
+          onClick={() => {
+            this.viewSurveyDetails(survey._id);
+          }}
+        >
           <div className="card-body">
             <h5 className="card-title">{survey.title}</h5>
             <h6 className="card-subtitle mb-2 text-muted">{survey.subject}</h6>
@@ -28,11 +39,10 @@ class SurveyList extends React.Component {
           </div>
         </div>
       );
-    }))
+    });
 
-    console.log("SURVEY LIST",surveyList)
-    return surveyList
-
+    console.log("SURVEY LIST", surveyList);
+    return surveyList;
   }
 
   render() {
@@ -52,4 +62,4 @@ function mapStateToProps(state) {
 export default connect(
   mapStateToProps,
   { fetchSurveys }
-)(SurveyList);
+)(withRouter(SurveyList));

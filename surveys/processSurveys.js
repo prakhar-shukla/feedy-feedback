@@ -68,7 +68,7 @@ function handleWebHook(req, res) {
       },
       {
         $inc: { [event.choice]: 1 },
-        $set: { "recipients.$.responded": true },
+        $set: { "recipients.$.responded": true,"recipients.$.response": event.choice },
         lastResponded: new Date()
       }
     ).exec();
@@ -77,9 +77,7 @@ function handleWebHook(req, res) {
 }
 
 async function getSurveyList(req, res) {
-  const surveys = await Survey.find({ _user: req.user.id }).select({
-    recipients: false
-  });
+  const surveys = await Survey.find({ _user: req.user.id });
   res.send(surveys);
 }
 

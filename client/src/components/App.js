@@ -7,6 +7,7 @@ import Header from "./Header/Header";
 import Dashboard from "./Dashboard/Dashboard";
 import Thankyou from "./ThankYou/Thankyou";
 import SurveyNew from "./Surveys/SurveyNew";
+import SurveyDetails from "./Surveys/SurveyList/SurveyDetails"
 
 const Landing = () => <h2>Landing</h2>;
 
@@ -25,6 +26,7 @@ class App extends React.Component {
               <div className="content-area" style={{ margin: "20px 0" }}>
                 <Route exact path="/" component={Landing} />
                 <Route path="/dashboard" component={Dashboard} />
+                <Route path="/survey/:id" component={SurveyDetails} />
                 <Route path="/surveys/new" component={SurveyNew} />
                 <Route path="/thankyou" component={Thankyou} />
               </div>

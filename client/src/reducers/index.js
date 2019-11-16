@@ -7,4 +7,4 @@ export default combineReducers({
     auth: authReducer,
     form: reduxFormReducer,
     surveys: surveysReducer
-})
+}) 
